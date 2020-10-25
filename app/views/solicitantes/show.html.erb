@@ -1,0 +1,22 @@
+<h2><%= @solicitante.nome %></h2>
+<p><%= @solicitante.cnpj %></p>
+<p><%= @solicitante.endereco %></p>
+<p><%= @solicitante.telefone %></p>
+
+<ul class="list-group">
+  <% @solicitante.solicitations.each do |solicitation| %>
+    <li class="list-group-item"><%= "Valor solicitado: R$ #{solicitation.valor}" %></li>
+    <li class="list-group-item"><%= "número de parcelas: #{solicitation.n_parcelas}" %></li>
+    <% parcela = solicitation.valor * ((((1 + 0.015) ** solicitation.n_parcelas) * 0.015) / (((1 + 0.015) ** solicitation.n_parcelas) - 1))%>
+    <% solicitation.valor_parcela = parcela %>
+    <li class="list-group-item"><%= "Valor mensal a ser pago:  R$#{solicitation.valor_parcela}" %></li>
+    <li class="list-group-item"><%= "Primeira parcela: #{solicitation.datas_pagamentos}" %></li>
+    <% while solicitation.n_parcelas > 0 %>
+      <% solicitation.n_parcelas -= 1 %>
+      <% solicitation.datas_pagamentos = solicitation.datas_pagamentos + 1.month %>
+      <li class="list-group-item"><%= "Próxima parcela: #{solicitation.datas_pagamentos}" %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "Simule seu crédito", new_solicitante_solicitation_path(@solicitante)%>

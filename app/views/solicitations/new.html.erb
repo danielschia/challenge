@@ -1,0 +1,10 @@
+<%= simple_form_for [@solicitation.solicitante, @solicitation] do |f| %>
+  <%= f.label :valor %>
+  <%= f.number_field :valor %>
+  <%= f.label :n_parcelas %>
+  <%= f.number_field :n_parcelas %>
+  <%= f.input :datas_pagamentos, as: :date, html5: true %>
+  <%= f.submit %>
+<% end %>
+
+  

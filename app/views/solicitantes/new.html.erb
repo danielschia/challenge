@@ -1,0 +1,11 @@
+<%= form_for(@solicitante) do |f| %>
+  <%= f.label :nome %>
+  <%= f.text_field :nome %>
+  <%= f.label :endereço %>
+  <%= f.text_field :endereco %>
+  <%= f.label :cnpj %>
+  <%= f.number_field :cnpj %>
+  <%= f.label :telefone %>
+  <%= f.number_field :telefone %>
+  <%= f.submit %>
+<% end %>
